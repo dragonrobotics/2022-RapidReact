@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
   private final WPI_TalonSRX motorBottomRight = new WPI_TalonSRX(4);
   private final WPI_TalonSRX motorBottomLeft = new WPI_TalonSRX(2);
   private final Joystick controller = new Joystick(0);
-  private double accelerationRate = .05;
+  private double accelerationRate = .1;
 
 
   /**
