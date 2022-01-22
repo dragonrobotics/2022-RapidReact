@@ -21,10 +21,8 @@ public class Robot extends TimedRobot {
   private final WPI_TalonSRX motorBottomRight = new WPI_TalonSRX(4);
   private final WPI_TalonSRX motorBottomLeft = new WPI_TalonSRX(2);
   private final Joystick controller = new Joystick(0);
-  private double topRightAccelleration = 0;
-  private double topLeftAccelleration = 0;
-  private double bottomRightAccelleration = 0;
-  private double bottomLeftAccelleration = 0;
+  private double accelerationRate = .1;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -75,46 +73,12 @@ public class Robot extends TimedRobot {
     double topRight    = -1 * controller.getRawAxis(1) + controller.getRawAxis(2) - controller.getRawAxis(0);
     double bottomLeft  = controller.getRawAxis(1) + controller.getRawAxis(2) + controller.getRawAxis(0);
     double bottomRight = -1 *controller.getRawAxis(1) + controller.getRawAxis(2) + controller.getRawAxis(0);
-    if(Math.abs(topRight) > Math.abs(motorTopRight.get())){
-      if(topRight < 0){
-        topRightAccelleration -= .2;
-      }else {
-        topRightAccelleration += .2;
-      }
-      motorTopRight.set(motorTopRight.get() + topRightAccelleration);
-    }else {
-      motorTopRight.set(topRight);
-    }
-    if(Math.abs(topLeft) > Math.abs(motorTopLeft.get())){
-      if(topLeft < 0){
-        topLeftAccelleration -= .2;
-      }else {
-        topLeftAccelleration += .2;
-      }
-      motorTopLeft.set(motorTopLeft.get() + topLeftAccelleration);
-    }else {
-      motorTopLeft.set(topLeft);
-    }
-    if(Math.abs(bottomLeft) > Math.abs(motorBottomLeft.get())){
-      if(bottomLeft < 0){
-        bottomLeftAccelleration -= .2;
-      }else {
-        bottomLeftAccelleration += .2;
-      }
-      motorBottomLeft.set(motorBottomLeft.get() + bottomLeftAccelleration);
-    }else {
-      motorBottomLeft.set(bottomLeft);
-    }
-    if(Math.abs(bottomRight) > Math.abs(motorBottomRight.get())){
-      if(bottomRight < 0){
-        bottomRightAccelleration -= .2;
-      }else {
-        bottomRightAccelleration += .2;
-      }
-      motorBottomRight.set(motorBottomRight.get() + bottomRightAccelleration);
-    }else {
-      motorBottomRight.set(bottomRight);
-    }
+
+    motorTopLeft.set(((topLeft - motorTopLeft.get())*accelerationRate) + motorTopLeft.get());
+    motorTopRight.set(((topRight - motorTopRight.get())*accelerationRate) + motorTopRight.get());
+    motorBottomLeft.set(((bottomLeft - motorBottomLeft.get())*accelerationRate) + motorBottomLeft.get());
+    motorBottomRight.set(((bottomRight - motorBottomRight.get())*accelerationRate) + motorBottomRight.get());
+
 
   }
 
