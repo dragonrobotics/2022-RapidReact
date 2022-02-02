@@ -5,7 +5,12 @@
 package team_5002.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Joystick;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
@@ -15,12 +20,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  * project.
  */
 public class Robot extends TimedRobot {
-  private final WPI_TalonSRX motorTopRight = new WPI_TalonSRX(3);
-  private final WPI_TalonSRX motorTopLeft = new WPI_TalonSRX(1);
+  private final WPI_TalonSRX motorTopRight = new WPI_TalonSRX(1);
+  private final WPI_TalonSRX motorTopLeft = new WPI_TalonSRX(3);
   private final WPI_TalonSRX motorBottomRight = new WPI_TalonSRX(4);
   private final WPI_TalonSRX motorBottomLeft = new WPI_TalonSRX(2);
   private final Joystick controller = new Joystick(0);
   private double accelerationRate = .1;
+  private double DeadZone = 0;
 
 
   /**
@@ -29,6 +35,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    DeadZone = SmartDashboard.getNumber("Dead Zone", .2);
+    SmartDashboard.putNumber("Dead Zone", DeadZone);
+    CameraServer.startAutomaticCapture();
   }
 
   /**
@@ -63,15 +72,38 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    motorTopRight.setNeutralMode(NeutralMode.Coast);
+    motorBottomLeft.setNeutralMode(NeutralMode.Coast);
+    motorBottomRight.setNeutralMode(NeutralMode.Coast);
+    motorTopLeft.setNeutralMode(NeutralMode.Coast);
+    motorTopLeft.setInverted(true);
+    motorBottomLeft.setInverted(true);
+  }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    double topLeft     = controller.getRawAxis(1) + controller.getRawAxis(2) - controller.getRawAxis(0);
-    double topRight    = -1 * controller.getRawAxis(1) + controller.getRawAxis(2) - controller.getRawAxis(0);
-    double bottomLeft  = controller.getRawAxis(1) + controller.getRawAxis(2) + controller.getRawAxis(0);
-    double bottomRight = -1 *controller.getRawAxis(1) + controller.getRawAxis(2) + controller.getRawAxis(0);
+    DeadZone = SmartDashboard.getNumber("Dead Zone", .2);
+    double StraightAxis = controller.getRawAxis(1);
+    double StrafeAxis = controller.getRawAxis(2);
+    double TurnAxis = controller.getRawAxis(0);
+    if (controller.getRawButton(2)) {
+      StrafeAxis = controller.getRawAxis(0);
+      TurnAxis = controller.getRawAxis(2);
+    }
+    StraightAxis = Math.abs(StraightAxis) > DeadZone ? StraightAxis: 0;
+    StrafeAxis = Math.abs(StrafeAxis) > DeadZone ? StrafeAxis: 0;
+    TurnAxis = Math.abs(TurnAxis) > DeadZone ? TurnAxis: 0;
+
+    StraightAxis = Math.pow(StraightAxis, 3);
+    StrafeAxis = Math.pow(StrafeAxis, 3);
+    TurnAxis = Math.pow(TurnAxis, 3);
+
+    double topLeft     = StraightAxis - TurnAxis - StrafeAxis;
+    double topRight    = StraightAxis + TurnAxis + StrafeAxis;
+    double bottomLeft  = StraightAxis - TurnAxis + StrafeAxis;
+    double bottomRight = StraightAxis + TurnAxis - StrafeAxis;
 
     motorTopLeft.set(((topLeft - motorTopLeft.get())*accelerationRate) + motorTopLeft.get());
     motorTopRight.set(((topRight - motorTopRight.get())*accelerationRate) + motorTopRight.get());
