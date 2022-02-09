@@ -7,7 +7,6 @@ package team_5002.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Joystick;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -20,10 +19,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  * project.
  */
 public class Robot extends TimedRobot {
-  private final WPI_TalonSRX motorTopRight = new WPI_TalonSRX(1);
-  private final WPI_TalonSRX motorTopLeft = new WPI_TalonSRX(3);
+  private final WPI_TalonSRX motorTopRight = new WPI_TalonSRX(2);
+  private final WPI_TalonSRX motorTopLeft = new WPI_TalonSRX(1);
   private final WPI_TalonSRX motorBottomRight = new WPI_TalonSRX(4);
-  private final WPI_TalonSRX motorBottomLeft = new WPI_TalonSRX(2);
+  private final WPI_TalonSRX motorBottomLeft = new WPI_TalonSRX(3);
   private final Joystick controller = new Joystick(0);
   private double accelerationRate = .1;
   private double DeadZone = 0;
@@ -100,10 +99,43 @@ public class Robot extends TimedRobot {
     StrafeAxis = Math.pow(StrafeAxis, 3);
     TurnAxis = Math.pow(TurnAxis, 3);
 
-    double topLeft     = StraightAxis - TurnAxis - StrafeAxis;
-    double topRight    = StraightAxis + TurnAxis + StrafeAxis;
-    double bottomLeft  = StraightAxis - TurnAxis + StrafeAxis;
-    double bottomRight = StraightAxis + TurnAxis - StrafeAxis;
+    boolean canSeeTarget = Vision.canSeeTarget();
+
+    if(TurnAxis > 0){
+      TurnAxis = TurnAxis - Math.abs(StraightAxis);
+    }else{
+      TurnAxis = TurnAxis + Math.abs(StraightAxis);
+    }
+
+    if(controller.getRawButton(3)){
+      double diff = Vision.aim();
+      double Offset = Math.abs(diff) > 2 ? diff < 0 ? -.15: .15 : 0;
+      TurnAxis = canSeeTarget ? Offset: .5;
+      StraightAxis = canSeeTarget ? StraightAxis: 0;
+    }
+    if(controller.getRawButton(4)){
+      double TargetDist = 200;
+      double dist = Vision.determineObjectDist();
+      double Offset = -1*(Math.abs(dist - TargetDist) > 4 ? dist - TargetDist < 0 ? -.15: .15 : 0);
+
+      TurnAxis = canSeeTarget ? TurnAxis: .5;
+      StraightAxis = canSeeTarget ? Offset: 0;
+    }
+    
+    double speedMult = ((((controller.getRawAxis(3) + 1) / 2)*-1)+1)*.75+.25;
+    double topLeft     = speedMult*(StraightAxis - TurnAxis - StrafeAxis);
+    double topRight    = speedMult*(StraightAxis + TurnAxis + StrafeAxis);
+    double bottomLeft  = speedMult*(StraightAxis - TurnAxis + StrafeAxis);
+    double bottomRight = speedMult*(StraightAxis + TurnAxis - StrafeAxis);
+
+    double BiggestMotor = Math.max(Math.max(Math.abs(topLeft),Math.abs(topRight)),Math.max(Math.abs(bottomLeft),Math.abs(bottomRight)));
+
+    if(BiggestMotor > 1){
+      topLeft = topLeft / BiggestMotor;
+      topRight = topRight / BiggestMotor;
+      bottomLeft = bottomLeft / BiggestMotor;
+      bottomRight = bottomRight / BiggestMotor;
+    }
 
     motorTopLeft.set(((topLeft - motorTopLeft.get())*accelerationRate) + motorTopLeft.get());
     motorTopRight.set(((topRight - motorTopRight.get())*accelerationRate) + motorTopRight.get());
