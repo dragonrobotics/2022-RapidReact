@@ -7,6 +7,7 @@ package team_5002.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -99,14 +100,13 @@ public class Robot extends TimedRobot {
     StrafeAxis = Math.pow(StrafeAxis, 3);
     TurnAxis = Math.pow(TurnAxis, 3);
 
-    boolean canSeeTarget = Vision.canSeeTarget();
-
-    if(TurnAxis > 0){
-      TurnAxis = TurnAxis - Math.abs(StraightAxis);
-    }else{
-      TurnAxis = TurnAxis + Math.abs(StraightAxis);
+    
+    if(StraightAxis != 0){
+      TurnAxis = (TurnAxis/(Math.abs(StraightAxis)/2));
     }
-
+    if(controller.getRawButton(3) || controller.getRawButton(4)){
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
+      boolean canSeeTarget = Vision.canSeeTarget();
     if(controller.getRawButton(3)){
       double diff = Vision.aim();
       double Offset = Math.abs(diff) > 2 ? diff < 0 ? -.15: .15 : 0;
@@ -120,6 +120,8 @@ public class Robot extends TimedRobot {
 
       TurnAxis = canSeeTarget ? TurnAxis: .5;
       StraightAxis = canSeeTarget ? Offset: 0;
+    }}else{
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     }
     
     double speedMult = ((((controller.getRawAxis(3) + 1) / 2)*-1)+1)*.75+.25;
