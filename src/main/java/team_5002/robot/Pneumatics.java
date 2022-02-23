@@ -22,12 +22,11 @@ public class Pneumatics
     static DoubleSolenoid Double2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 0);
 	boolean enabled = pcmCompressor.enabled();
 	boolean pressureSwitch = pcmCompressor.getPressureSwitchValue();
-	//double current = pcmCompressor.getCompressorCurrent();
+	double current = pcmCompressor.getCurrent();
 	double currentPressure = pcmCompressor.getPressure();
 	
 	public void setCompressor() {
 		pcmCompressor.enableDigital();
-		pcmCompressor.disable();
 	}
 
 	public static void open1() {
