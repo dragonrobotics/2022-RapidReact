@@ -1,4 +1,4 @@
-package team_5002.robot;
+package team_5002.robot.libraries;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

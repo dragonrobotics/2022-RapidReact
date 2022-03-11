@@ -1,0 +1,28 @@
+{
+    "devices":[
+        {
+            "deviceName":"driveTopRight",
+            "deviceType":"motor",
+            "canID":7,
+            "inverted":false
+        },
+        {
+            "deviceName":"driveTopLeft",
+            "deviceType":"motor",
+            "canID":9,
+            "inverted":true
+        },
+        {
+            "deviceName":"driveBottomRight",
+            "deviceType":"motor",
+            "canID":10,
+            "inverted":false
+        },
+        {
+            "deviceName":"driveBottomLeft",
+            "deviceType":"motor",
+            "canID":4,
+            "inverted":true
+        }
+]
+}
