@@ -1,6 +1,8 @@
-package team_5002.robot;
+package team_5002.robot.systems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import team_5002.robot.libraries.Vision;
 
 public class Shooter {
     WPI_TalonSRX motor1;

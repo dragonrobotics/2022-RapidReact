@@ -1,0 +1,28 @@
+{
+    "controllers":[
+        {
+            "name":"input",
+            "controllerPort":0
+        }
+    ],
+    "controls":[
+        {
+            "controlName":"StraightAxis",
+            "controlType":"axis",
+            "inputID":1,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"StrafeAxis",
+            "controlType":"axis",
+            "inputID":2,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"TurnAxis",
+            "controlType":"axis",
+            "inputID":0,
+            "controllerName":"input"
+        }
+    ]
+}
