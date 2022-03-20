@@ -4,6 +4,7 @@
 
 package team_5002.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.simulation.SimHooks;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,6 +14,8 @@ import team_5002.robot.libraries.controls;
 import team_5002.robot.libraries.devices;
 import team_5002.robot.libraries.digitalComs;
 import team_5002.robot.systems.Drivetrain;
+import team_5002.robot.systems.Lift;
+import team_5002.robot.systems.Shooter;
 import edu.wpi.first.cameraserver.CameraServer;
 
 /**
@@ -33,5 +36,14 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     drive.loop();
+
+    Shooter.setShooterSpeed(Shooter.computeSpeed(45));
+    Shooter.setBeltSpeed(100);
+
+    Lift.armUp();
+    Lift.armDown();
+    Lift.lean();
+    Lift.straighten();
+    
   }
 }

@@ -23,6 +23,42 @@
             "controlType":"axis",
             "inputID":0,
             "controllerName":"input"
+        },
+        {
+            "controlName":"trigger",
+            "controlType":"trigger",
+            "inputID":1,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"button5",
+            "controlType":"button",
+            "inputID":5,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"up",
+            "controlType":"button",
+            "inputID":7,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"down",
+            "controlType":"button",
+            "inputID":8,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"lean",
+            "controlType":"button",
+            "inputID":9,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"straighten",
+            "controlType":"button",
+            "inputID":10,
+            "controllerName":"input"
         }
     ]
 }

@@ -23,6 +23,53 @@
             "deviceType":"motor",
             "canID":4,
             "inverted":true
+        },
+        {
+            "deviceName":"motor1",
+            "deviceType":"motor",
+            "canID":1,
+            "inverted":false
+        },
+        {
+            "deviceName":"belt1",
+            "deviceType":"motor",
+            "canID":8,
+            "inverted":false
+        },
+        {
+            "deviceName":"belt2",
+            "deviceType":"motor",
+            "canID":3,
+            "inverted":false
+        },
+        {
+            "deviceName":"belt3",
+            "deviceType":"motor",
+            "canID":5,
+            "inverted":false
+        },
+        {
+            "deviceName":"liftMotor",
+            "deviceType":"motor",
+            "canID":6,
+            "inverted":false
+        },
+        {
+            "deviceName":"solenoid1",
+            "deviceType":"solenoid",
+            "forwardPort":0,
+            "reversePort":2
+        },
+        {
+            "deviceName":"solenoid2",
+            "deviceType":"solenoid",
+            "forwardPort":1,
+            "reversePort":3
+        },
+        {
+            "deviceName":"compressor",
+            "deviceType":"compressor",
+            "portNumber":11
         }
 ]
 }

@@ -11,7 +11,7 @@ import org.json.*;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
 public class controls {
-    HashMap<String, Object[]> controls = new HashMap<>();
+    static HashMap<String, Object[]> controls = new HashMap<>();
     public controls(String controlsConfigName){
         JSONObject controlsConfig;
         Path controlsConfigPath = Filesystem.getDeployDirectory().toPath().resolve(controlsConfigName);
@@ -41,13 +41,15 @@ public class controls {
             System.exit(1);
         }
     }
-    public Object getInput(String inputName){
+    public static Object getInput(String inputName){
         Object[] input = controls.get(inputName);
         Joystick controller = (Joystick) input[0];
         if(input[2].equals("axis")){
             return controller.getRawAxis((int) input[1]);
         }else if(input[2].equals("button")){
             return controller.getRawButton((int) input[1]);
+        }else if(input[2].equals("trigger")){
+            return controller.getTriggerPressed();
         }else{
             return null;
         }
