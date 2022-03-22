@@ -58,13 +58,25 @@
             "deviceName":"solenoid1",
             "deviceType":"solenoid",
             "forwardPort":0,
-            "reversePort":2
+            "reversePort":4
         },
         {
             "deviceName":"solenoid2",
             "deviceType":"solenoid",
             "forwardPort":1,
-            "reversePort":3
+            "reversePort":5
+        },
+        {
+            "deviceName":"solenoid3",
+            "deviceType":"solenoid",
+            "forwardPort":2,
+            "reversePort":6
+        },
+        {
+            "deviceName":"solenoid4",
+            "deviceType":"solenoid",
+            "forwardPort":3,
+            "reversePort":7
         },
         {
             "deviceName":"compressor",
