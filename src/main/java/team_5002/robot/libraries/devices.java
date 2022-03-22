@@ -1,5 +1,4 @@
 package team_5002.robot.libraries;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,13 +35,8 @@ public class devices {
                     else if(deviceType.equals("solenoid")){
                         int forwardPort = device.getInt("forwardPort");
                         int reversePort = device.getInt("reversePort");
-                        DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, forwardPort, reversePort);
+                        DoubleSolenoid solenoid = new DoubleSolenoid(20, PneumaticsModuleType.CTREPCM, forwardPort, reversePort);
                         devices.put(deviceName, solenoid);
-                    }
-                    else if(deviceType.equals("compressor")){
-                        int portNumber = device.getInt("canID");
-                        Compressor compressor = new Compressor(portNumber, PneumaticsModuleType.CTREPCM);
-                        devices.put(deviceName, compressor);
                     }
             }
         }catch(IOException e){

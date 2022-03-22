@@ -1,12 +1,8 @@
 package team_5002.robot.libraries;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
-import edu.wpi.first.math.Pair;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import org.json.*;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,15 +37,18 @@ public class controls {
             System.exit(1);
         }
     }
-    public static Object getInput(String inputName){
+    public Object getInput(String inputName){
         Object[] input = controls.get(inputName);
+        if(input == null){
+            return 0;
+        }
         Joystick controller = (Joystick) input[0];
         if(input[2].equals("axis")){
             return controller.getRawAxis((int) input[1]);
         }else if(input[2].equals("button")){
             return controller.getRawButton((int) input[1]);
         }else if(input[2].equals("trigger")){
-            return controller.getTriggerPressed();
+            return controller.getTrigger();
         }else{
             return null;
         }

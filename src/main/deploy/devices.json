@@ -25,9 +25,15 @@
             "inverted":true
         },
         {
-            "deviceName":"motor1",
+            "deviceName":"shooter1",
             "deviceType":"motor",
             "canID":1,
+            "inverted":false
+        },
+        {
+            "deviceName":"shooter2",
+            "deviceType":"motor",
+            "canID":2,
             "inverted":false
         },
         {
@@ -55,21 +61,16 @@
             "inverted":false
         },
         {
-            "deviceName":"solenoid1",
+            "deviceName":"intakeSolenoid1",
             "deviceType":"solenoid",
-            "forwardPort":0,
-            "reversePort":2
+            "forwardPort":"1",
+            "reversePort":"2"
         },
         {
-            "deviceName":"solenoid2",
+            "deviceName":"intakeSolenoid2",
             "deviceType":"solenoid",
-            "forwardPort":1,
-            "reversePort":3
-        },
-        {
-            "deviceName":"compressor",
-            "deviceType":"compressor",
-            "portNumber":11
+            "forwardPort":"3",
+            "reversePort":"4"
         }
 ]
 }

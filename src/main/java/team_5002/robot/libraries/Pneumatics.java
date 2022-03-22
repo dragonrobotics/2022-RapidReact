@@ -12,13 +12,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Pneumatics
 {
-	private static Compressor pcmCompressor;
+	private Compressor pcmCompressor;
 	private DoubleSolenoid[] solenoids;
 
-	public Pneumatics(DoubleSolenoid[] solenoids, Compressor compressor) {
-		this.pcmCompressor = compressor;
+	public Pneumatics(DoubleSolenoid[] solenoids) {
 		this.solenoids = solenoids;
-		this.pcmCompressor.enableDigital();
 		}
 
 
