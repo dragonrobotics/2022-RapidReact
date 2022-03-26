@@ -5,28 +5,25 @@
 package team_5002.robot.libraries;
 
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
-/** Add your docs here. */
 
 public class Pneumatics
 {
-	private Compressor pcmCompressor;
 	private DoubleSolenoid[] solenoids;
+	
 
 	public Pneumatics(DoubleSolenoid[] solenoids) {
 		this.solenoids = solenoids;
 		}
 
 
-	public void open() {
+	public void close() {
 		for (DoubleSolenoid solenoid : this.solenoids) {
 			solenoid.set(kReverse);
 		}
 	}
 
-	public  void close() {
+	public  void open() {
 		for (DoubleSolenoid solenoid : this.solenoids) {
 			solenoid.set(kForward);
 		}
@@ -37,5 +34,10 @@ public class Pneumatics
 		for (DoubleSolenoid solenoid : this.solenoids) {
 			solenoid.set(kOff);
 		}
+	}
+
+
+	public static void check() {
+		
 	}
 }

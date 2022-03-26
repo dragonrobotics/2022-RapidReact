@@ -28,13 +28,13 @@
             "deviceName":"shooter1",
             "deviceType":"motor",
             "canID":1,
-            "inverted":false
+            "inverted":true
         },
         {
             "deviceName":"shooter2",
             "deviceType":"motor",
             "canID":2,
-            "inverted":false
+            "inverted":true
         },
         {
             "deviceName":"belt1",
@@ -61,16 +61,16 @@
             "inverted":false
         },
         {
-            "deviceName":"intakeSolenoid1",
+            "deviceName":"intakeSolenoid",
             "deviceType":"solenoid",
             "forwardPort":"1",
-            "reversePort":"2"
+            "reversePort":"3"
         },
         {
-            "deviceName":"intakeSolenoid2",
+            "deviceName":"liftSolenoid",
             "deviceType":"solenoid",
-            "forwardPort":"3",
-            "reversePort":"4"
+            "forwardPort":"0",
+            "reversePort":"2"
         }
 ]
 }

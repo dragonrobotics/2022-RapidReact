@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.json.*;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
