@@ -3,8 +3,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Vision {
-    public static double camAngle = 30;
-    public static double cameraHeight = 118;
+    public static double camAngle = 25;
+    public static double cameraHeight = 126;
     public static double goalHeight = 264;
     
 
@@ -16,8 +16,6 @@ public class Vision {
 
     // Determine the distance an object is from the limelight given the camera's height off of the ground and the object's height off of the ground.
     public static double determineObjectDist() {
-        camAngle = SmartDashboard.getNumber("Angle", 30);
-        cameraHeight = SmartDashboard.getNumber("Height", 110);
         double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0.0);
         double distance1 = (goalHeight - cameraHeight) / Math.tan(3.14125/180*(camAngle + ty));
         SmartDashboard.putNumber("distance", distance1);

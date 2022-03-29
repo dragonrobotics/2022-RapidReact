@@ -63,14 +63,14 @@
         {
             "deviceName":"intakeSolenoid",
             "deviceType":"solenoid",
-            "forwardPort":"1",
-            "reversePort":"3"
+            "forwardPort":"0",
+            "reversePort":"2"
         },
         {
             "deviceName":"liftSolenoid",
             "deviceType":"solenoid",
-            "forwardPort":"0",
-            "reversePort":"2"
+            "forwardPort":"1",
+            "reversePort":"3"
         }
 ]
 }

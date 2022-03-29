@@ -3,11 +3,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+
+import org.ejml.equation.ManagerFunctions.InputN;
 import org.json.*;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
 public class controls {
     static HashMap<String, Object[]> controls = new HashMap<>();
+    static Joystick joystick;
     public controls(String controlsConfigName){
         JSONObject controlsConfig;
         Path controlsConfigPath = Filesystem.getDeployDirectory().toPath().resolve(controlsConfigName);
@@ -19,6 +22,7 @@ public class controls {
             for (int controllerNum = 0; controllerNum < controllerList.length(); controllerNum++) {
                 JSONObject controller = controllerList.getJSONObject(controllerNum);
                 controllers.put(controller.getString("name"), new Joystick(controller.getInt("controllerPort")));
+                joystick = new Joystick(controller.getInt("controllerPort"));
             }
             
             JSONArray controlList = controlsConfig.getJSONArray("controls");
@@ -38,6 +42,9 @@ public class controls {
         }
     }
     public Object getInput(String inputName){
+        if(inputName == "controller"){
+            return joystick;
+        }
         Object[] input = controls.get(inputName);
         if(input == null){
             return 0;

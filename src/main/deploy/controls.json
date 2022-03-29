@@ -39,25 +39,25 @@
         {
             "controlName":"up",
             "controlType":"button",
-            "inputID":7,
+            "inputID":5,
             "controllerName":"input"
         },
         {
             "controlName":"down",
             "controlType":"button",
-            "inputID":8,
+            "inputID":3,
             "controllerName":"input"
         },
         {
             "controlName":"lean",
             "controlType":"button",
-            "inputID":9,
+            "inputID":6,
             "controllerName":"input"
         },
         {
             "controlName":"straighten",
             "controlType":"button",
-            "inputID":10,
+            "inputID":4,
             "controllerName":"input"
         }
     ]

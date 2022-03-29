@@ -26,7 +26,7 @@ public class Lift {
 
     public void armUp(){
         if(limitSwitch1.get() == true){
-            this.liftMotor.set(-.2);
+            this.liftMotor.set(-1);
             bling.setLEDs(blingState.extendingArms);
         } else {
             armStop();
@@ -36,7 +36,7 @@ public class Lift {
 
     public void armDown(){   
         if(limitSwitch2.get() == true){
-            this.liftMotor.set(.2);
+            this.liftMotor.set(1);
             bling.setLEDs(blingState.retractingArms);
         } else {
             armStop();
@@ -76,6 +76,8 @@ public class Lift {
             straighten();
         }
         SmartDashboard.putNumber("Motor", liftMotor.get());
+        SmartDashboard.putBoolean("4", limitSwitch1.get());
+        SmartDashboard.putBoolean("5", limitSwitch2.get());
         
     }
 }

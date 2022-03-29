@@ -3,6 +3,7 @@ package team_5002.robot.systems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team_5002.robot.Robot;
 import team_5002.robot.libraries.Pneumatics;
 import team_5002.robot.libraries.Vision;
@@ -24,12 +25,15 @@ public class Shooter {
     DoubleSolenoid[] intake = {(DoubleSolenoid) Robot.Devices.getDevice("intakeSolenoid")};
     Bling bling = Robot.bling;
     Pneumatics intakePneumatics = new Pneumatics(intake);
-    public Shooter(){}
+    public Shooter(){
+        SmartDashboard.putNumber("Speed", 17000);
+    }
     public double computeSpeed(double distance) {
-        return 17000;
+        int speedPer = 30/950;
+        return speedPer * distance;
       }
     private double getShooterSpeed(){
-        return motor1.getSelectedSensorVelocity()/1024;
+        return -motor1.getSelectedSensorVelocity()/1024;
     }
     private void run(double speed){
         motor1.set(speed);
@@ -41,17 +45,22 @@ public class Shooter {
     }
 
     public void loop(){
+        SmartDashboard.putNumber("CurrentMotorSpeed", getShooterSpeed());
         if((boolean) Robot.Controls.getInput("Shoot")){
             bling.setLEDs(blingState.shooting);
             if(Vision.canSeeTarget()){
-                if(Math.abs(Vision.aim())<5){
+                if((Math.abs(Vision.aim())<5)){
                     double distance = Vision.determineObjectDist();
-                    double wheelSpeed = computeSpeed(distance);
-                    if(getShooterSpeed() < wheelSpeed){
-                        run(.1 + motorTopLeft.get());
-                    }else{
+                    double targetSpeed = computeSpeed(distance);
+                    if(Math.abs(getShooterSpeed() - targetSpeed)<2){
                         run(1);
                         setBeltSpeed(.5);
+                    }else{
+                        if(getShooterSpeed() < targetSpeed){
+                            run(motor1.get() + .1);
+                        }else{
+                            run(motor1.get() - .1);
+                        }
                     }
                 }else{
                     run(0);
@@ -77,7 +86,6 @@ public class Shooter {
         if((boolean) Robot.Controls.getInput("intake")){
             bling.setLEDs(blingState.intake);
             intakePneumatics.open();
-            setBeltSpeed(.5);
             belt1.set(1);
         }else{
             intakePneumatics.close();
