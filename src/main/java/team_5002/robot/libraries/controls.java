@@ -3,8 +3,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
-
-import org.ejml.equation.ManagerFunctions.InputN;
 import org.json.*;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -55,7 +53,7 @@ public class controls {
         }else if(input[2].equals("button")){
             return controller.getRawButton((int) input[1]);
         }else if(input[2].equals("trigger")){
-            return controller.getTrigger();
+            return controller.getRawAxis((int) input[1]) >.7;
         }else{
             return null;
         }

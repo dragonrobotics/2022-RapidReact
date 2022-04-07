@@ -3,7 +3,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Vision {
-    public static double camAngle = 25;
+    public static double camAngle = 9.08;
     public static double cameraHeight = 126;
     public static double goalHeight = 264;
     

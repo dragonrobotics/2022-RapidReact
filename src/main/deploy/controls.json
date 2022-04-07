@@ -7,6 +7,12 @@
     ],
     "controls":[
         {
+            "controlName":"shortShot",
+            "controlType":"button",
+            "inputID":3,
+            "controllerName":"input"
+        },
+        {
             "controlName":"StraightAxis",
             "controlType":"axis",
             "inputID":1,
@@ -15,37 +21,50 @@
         {
             "controlName":"StrafeAxis",
             "controlType":"axis",
-            "inputID":2,
+            "inputID":0,
             "controllerName":"input"
         },
         {
             "controlName":"TurnAxis",
             "controlType":"axis",
-            "inputID":0,
+            "inputID":4,
             "controllerName":"input"
         },
         {
             "controlName":"Shoot",
             "controlType":"trigger",
-            "inputID":1,
+            "inputID":3,
             "controllerName":"input"
         },
         {
             "controlName":"intake",
+            "controlType":"trigger",
+            "inputID":2,
+            "controllerName":"input"
+        },
+        {
+            "controlName":"spitter",
             "controlType":"button",
             "inputID":2,
             "controllerName":"input"
         },
         {
+            "controlName":"intakeToggle",
+            "controlType":"button",
+            "inputID":10,
+            "controllerName":"input"
+        },
+        
+        {
             "controlName":"up",
             "controlType":"button",
-            "inputID":5,
+            "inputID":4,
             "controllerName":"input"
         },
         {
             "controlName":"down",
             "controlType":"button",
-            "inputID":3,
+            "inputID":1,
             "controllerName":"input"
         },
         {
@@ -57,7 +76,7 @@
         {
             "controlName":"straighten",
             "controlType":"button",
-            "inputID":4,
+            "inputID":5,
             "controllerName":"input"
         }
     ]

@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import team_5002.robot.Robot;
 import team_5002.robot.libraries.Pneumatics;
 import team_5002.robot.libraries.controls;
-import team_5002.robot.systems.Bling.blingState;
 
 
 public class Lift {
@@ -17,7 +16,6 @@ public class Lift {
     controls controls = Robot.Controls;
     DigitalInput limitSwitch1 = new DigitalInput(4);
     DigitalInput limitSwitch2 = new DigitalInput(5);  
-    Bling bling = Robot.bling;  
     public Lift(){
         liftMotor = (WPI_TalonSRX) Robot.Devices.getDevice("liftMotor");
         DoubleSolenoid[] solenoids = {(DoubleSolenoid) Robot.Devices.getDevice("liftSolenoid")};
@@ -26,8 +24,7 @@ public class Lift {
 
     public void armUp(){
         if(limitSwitch1.get() == true){
-            this.liftMotor.set(-1);
-            bling.setLEDs(blingState.extendingArms);
+            this.liftMotor.set(1);
         } else {
             armStop();
         }
@@ -36,8 +33,7 @@ public class Lift {
 
     public void armDown(){   
         if(limitSwitch2.get() == true){
-            this.liftMotor.set(1);
-            bling.setLEDs(blingState.retractingArms);
+            this.liftMotor.set(-1);
         } else {
             armStop();
         }
@@ -50,12 +46,10 @@ public class Lift {
 
     public void lean(){
             this.pneumatics.open();
-            bling.setLEDs(blingState.tiltArms);
     }
 
     public void straighten(){
-            this.pneumatics.close();  
-            bling.setLEDs(blingState.tiltArms); 
+            this.pneumatics.close();
     }
 
     public void loop(){
