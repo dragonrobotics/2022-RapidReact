@@ -69,9 +69,5 @@ public class Lift {
         }else if(straighten){
             straighten();
         }
-        SmartDashboard.putNumber("Motor", liftMotor.get());
-        SmartDashboard.putBoolean("4", limitSwitch1.get());
-        SmartDashboard.putBoolean("5", limitSwitch2.get());
-        
     }
 }
