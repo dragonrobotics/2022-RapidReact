@@ -7,11 +7,11 @@ import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Shooter;
 
 public class Shoot extends SequentialCommandGroup{
-    public Shoot(Shooter shooter, Vision limelight, Drivetrain drivetrain, IntakeSubsystem intake){
+    public Shoot(Shooter shooter, Vision limelight, Drivetrain drivetrain, IntakeSubsystem intake, int limit){
         addCommands(
             new Aim(limelight, drivetrain),
             new RampUp(shooter, limelight),
-            new Fire(shooter, intake)
+            new Fire(shooter, intake, limit)
         );
     }
 }

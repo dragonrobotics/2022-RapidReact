@@ -17,20 +17,21 @@ public final class Constants {
         public static int liftMotorId = 6;
     }
     public static double aimDeadzone = 0.2;
-    public static double camAngle = 13;
+    public static double camAngle = 15.0517537059;
     public static double cameraHeight = 116;
     public static double goalHeight = 264;
 
     public static class Solenoids{
 
         public static final int LiftForward = 1;
-        public static final int LiftReverse = 3;}
+        public static final int LiftReverse = 3;
+    }
 
     public static int liftSwitchLower = 5;
     public static int liftSwitchUpper = 4;
-    public static double distanceSpeedMultiplier = .34;
-    public static double speedAddition = 160;
+    public static double distanceSpeedMultiplier = .3904;
+    public static double speedAddition = 154.093;
     public static double shooterSpeedDeadzone = 1;
     public static double triggerDeadzone = .1;
-    public static double shooter_kP = .05;
+    public static double shooter_kP = .025;
 }

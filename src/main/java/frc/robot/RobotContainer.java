@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -13,6 +14,8 @@ import frc.robot.commands.Drivetrain.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.XboxController.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import static edu.wpi.first.wpilibj.util.ErrorMessages.requireNonNullParam;
 
 public class RobotContainer {
@@ -26,7 +29,7 @@ public class RobotContainer {
   private final Climber climber = new Climber();
   private final IntakeSubsystem intake = new IntakeSubsystem();
   // shooter commands
-  private final Shoot ShootCommand = new Shoot(shooter, limelight, drivetrain, intake);
+  private final Shoot ShootCommand = new Shoot(shooter, limelight, drivetrain, intake, 10);
   private final Intake IntakeCommand = new Intake(intake);
   private final ShortShot ShortShotCommand = new ShortShot(intake, shooter);
   private final Backrun BackrunCommand = new Backrun(intake, shooter);
@@ -86,13 +89,14 @@ public class RobotContainer {
 
     leftBumper.whenPressed(ArmsBackCommand);
     rightBumper.whenPressed(ArmsForwardCommand);
-    buttonA.whenHeld(RaiseLiftCommand);
-    buttonY.whenHeld(LowerLiftCommand);
+    buttonA.whileActiveOnce(RaiseLiftCommand);
+    buttonY.whileActiveOnce(LowerLiftCommand);
 
     rightJoystickButton.whenPressed(new ConditionalCommand(RaiseIntakeCommand, LowerIntakeCommand, intake::intakeDown));
 
-    buttonX.whenHeld(ShortShotCommand);
-    buttonB.whenHeld(BackrunCommand);
+    buttonX.whileActiveOnce(ShortShotCommand);
+    buttonB.whileActiveOnce(BackrunCommand);
+    SmartDashboard.putNumber("Speed", 0);
 
     
 
@@ -101,6 +105,9 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new InstantCommand();
+    return new SequentialCommandGroup(
+      new Move(drivetrain, 0, .5, 0, 4),
+      new Shoot(shooter, limelight, drivetrain, intake, 50)
+    );
   }
 }

@@ -13,10 +13,6 @@ public class RaiseLift extends CommandBase{
     public void execute(){
         m_climber.liftUp();
     }
-    @Override
-    public boolean isFinished(){
-        return m_climber.getLiftState() == 1;
-    }
     
     @Override
     public void end(boolean interup){

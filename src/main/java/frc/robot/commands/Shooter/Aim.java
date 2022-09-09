@@ -16,7 +16,7 @@ public class Aim extends CommandBase{
     @Override
     public void execute(){
         double xAngle = limelight.getXAngle();
-        wheelBase.drive(0, 0, xAngle > 0 ? -.2 : .2);
+        wheelBase.drive(0, 0, xAngle > 0 ? .2 : -.2);
     }
 
     @Override
