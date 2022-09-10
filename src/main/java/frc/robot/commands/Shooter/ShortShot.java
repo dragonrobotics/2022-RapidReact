@@ -17,7 +17,7 @@ public class ShortShot extends CommandBase{
     public void execute(){
         m_intake.startBelt();
         m_intake.startFeed();
-        m_shooter.setPower(1);
+        m_shooter.setSpeed(200);
     }
 
     @Override
