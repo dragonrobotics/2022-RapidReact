@@ -20,7 +20,7 @@ public class Drivetrain extends  SubsystemBase{
         double topRight    = (ySpeed + turnSpeed + xSpeed);
         double bottomLeft  = (ySpeed - turnSpeed + xSpeed);
         double bottomRight = (ySpeed + turnSpeed - xSpeed);
-
+        
         double BiggestMotor = Math.max(Math.max(Math.abs(topLeft),Math.abs(topRight)),Math.max(Math.abs(bottomLeft),Math.abs(bottomRight)));
 
         if(BiggestMotor > 1){

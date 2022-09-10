@@ -14,7 +14,7 @@ public class IntakeSubsystem extends  SubsystemBase{
     private static WPI_TalonSRX feedMotor = new WPI_TalonSRX(5);
     private static DoubleSolenoid intakePneumatics = new DoubleSolenoid(20, PneumaticsModuleType.CTREPCM, 0, 2);
     public IntakeSubsystem(){}
-    public void startIntake() {intakeMotor.set(.75);}
+    public void startIntake() {intakeMotor.set(1);}
     public void stopIntake() {intakeMotor.set(0);}
     public void reverseIntake() {intakeMotor.set(-1);}
     public void startBelt() {beltMotor.set(1);}

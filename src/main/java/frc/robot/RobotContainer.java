@@ -74,6 +74,10 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
+    SmartDashboard.putBoolean("SetSpeed", false);
+    SmartDashboard.putBoolean("DisableLimelight", false);
+    SmartDashboard.putBoolean("SpeedLimiter", false);
+    SmartDashboard.putNumber("SpeedLimit", .2);
     JoystickButton buttonA = new JoystickButton(controller, Button.kA.value);
     JoystickButton buttonB = new JoystickButton(controller, Button.kB.value);
     JoystickButton buttonX = new JoystickButton(controller, Button.kX.value);

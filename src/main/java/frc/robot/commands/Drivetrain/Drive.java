@@ -1,6 +1,7 @@
 package frc.robot.commands.Drivetrain;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -31,6 +32,13 @@ public class Drive extends CommandBase{
         StraightAxis = Math.pow(StraightAxis, 3);
         StrafeAxis = Math.pow(StrafeAxis, 3);
         TurnAxis = Math.pow(TurnAxis, 3);
+        if(SmartDashboard.getBoolean("SpeedLimiter", false))
+        {
+            double SpeedLimit = SmartDashboard.getNumber("SpeedLimit", .2);
+            StraightAxis *= SpeedLimit;
+            StrafeAxis *= SpeedLimit;
+            TurnAxis *= SpeedLimit;
+        }
         if(StraightAxis != 0){
             TurnAxis = (TurnAxis-(TurnAxis*(Math.abs(StraightAxis)/2)));
         }

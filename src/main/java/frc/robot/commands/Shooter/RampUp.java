@@ -30,7 +30,10 @@ public class RampUp extends CommandBase{
     }
 
     private double calculateSpeed(){
-        return SmartDashboard.getNumber("Speed", 0);
+        if(SmartDashboard.getBoolean("SetSpeed", false))
+            return SmartDashboard.getNumber("Speed", 0);
+        if(SmartDashboard.getBoolean("DisableLimelight", false));
+            return 3; //TODO: Test to find right speed.
         //return (calculateDistance()*Constants.distanceSpeedMultiplier)+Constants.speedAddition;
     }
 
