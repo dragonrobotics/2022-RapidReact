@@ -17,7 +17,7 @@ public final class Constants {
         public static int liftMotorId = 6;
     }
     public static double aimDeadzone = 0.2;
-    public static double camAngle = 15.0517537059;
+    public static double camAngle = 16.3277;
     public static double cameraHeight = 116;
     public static double goalHeight = 264;
 
